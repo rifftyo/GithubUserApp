@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.rifftyo.githubuserapp.ViewModel.MainViewModel
+import com.rifftyo.githubuserapp.adapter.FollowersAdapter
 import com.rifftyo.githubuserapp.databinding.FragmentFollowersBinding
 
 class FollowersFragment : Fragment() {
@@ -15,10 +17,9 @@ class FollowersFragment : Fragment() {
     private lateinit var mainViewModel: MainViewModel
     private lateinit var binding: FragmentFollowersBinding
     private lateinit var adapter: FollowersAdapter
-    private lateinit var username: String
 
     companion object {
-        private const val TAG = "FollowersFragment"
+        var EXTRA_FOLLOWERS = "extrafollowers"
     }
 
 
@@ -34,7 +35,8 @@ class FollowersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Koneksi MainViewModel
-        mainViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
+        mainViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(
+            MainViewModel::class.java)
 
         // Koneksi Fungsi Loading
         mainViewModel.isLoading.observe(viewLifecycleOwner){
@@ -48,10 +50,8 @@ class FollowersFragment : Fragment() {
 
         showRecyclerView()
 
-        val userFollowers = arguments?.getString(UserDetailActivity.EXTRA_USERNAME).toString()
-        mainViewModel.getFollowersUser(userFollowers)
+        mainViewModel.getFollowersUser(EXTRA_FOLLOWERS)
     }
-
 
     private fun showLoading(isLoading: Boolean) {
         if (isLoading) {

@@ -1,4 +1,4 @@
-package com.rifftyo.githubuserapp.ui
+package com.rifftyo.githubuserapp.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,13 +11,15 @@ import com.rifftyo.githubuserapp.data.response.FollowersUserResponseItem
 import com.rifftyo.githubuserapp.databinding.ListUsersBinding
 
 
-class FollowersAdapter: ListAdapter<FollowersUserResponseItem, FollowersAdapter.MyViewHolderFollowers>(DIFF_CALLBACK_FOLLOWERS) {
+class FollowersAdapter: ListAdapter<FollowersUserResponseItem, FollowersAdapter.MyViewHolderFollowers>(
+    DIFF_CALLBACK_FOLLOWERS
+) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolderFollowers {
         val binding = ListUsersBinding.inflate(LayoutInflater.from(parent.context),parent, false)
         return MyViewHolderFollowers(binding)
     }
 
-    override fun onBindViewHolder(holder: MyViewHolderFollowers, position: Int) {
+   override fun onBindViewHolder(holder: MyViewHolderFollowers, position: Int) {
         val userFollow = getItem(position)
         holder.bind(userFollow)
     }

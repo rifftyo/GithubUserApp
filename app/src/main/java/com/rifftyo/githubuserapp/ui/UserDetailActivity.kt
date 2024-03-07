@@ -11,6 +11,8 @@ import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.rifftyo.githubuserapp.R
+import com.rifftyo.githubuserapp.ViewModel.MainViewModel
+import com.rifftyo.githubuserapp.adapter.SectionsPagerAdapter
 import com.rifftyo.githubuserapp.data.response.UserDetailResponse
 import com.rifftyo.githubuserapp.databinding.ActivityUserDetailBinding
 
@@ -63,6 +65,8 @@ class UserDetailActivity : AppCompatActivity() {
         val username = intent.getStringExtra(EXTRA_USERNAME)
         if (username != null) {
             mainViewModel.getDetailUsers(username)
+            FollowersFragment.EXTRA_FOLLOWERS = username
+            FollowingFragment.EXTRA_FOLLOWING = username
         } else {
             Log.e(TAG, "No username provided")
         }

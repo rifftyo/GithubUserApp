@@ -1,8 +1,10 @@
-package com.rifftyo.githubuserapp.ui
+package com.rifftyo.githubuserapp.adapter
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.rifftyo.githubuserapp.ui.FollowersFragment
+import com.rifftyo.githubuserapp.ui.FollowingFragment
 
 class SectionsPagerAdapter(activity: AppCompatActivity): FragmentStateAdapter(activity) {
     override fun getItemCount(): Int {

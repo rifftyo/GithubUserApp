@@ -1,4 +1,4 @@
-package com.rifftyo.githubuserapp.ui
+package com.rifftyo.githubuserapp.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.rifftyo.githubuserapp.R
 import com.rifftyo.githubuserapp.data.response.UserItem
 import com.rifftyo.githubuserapp.databinding.ListUsersBinding
+import com.rifftyo.githubuserapp.ui.UserDetailActivity
 
 class UsersAdapter: ListAdapter<UserItem, UsersAdapter.MyViewHolder>(DIFF_CALLBACK) {
 

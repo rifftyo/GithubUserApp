@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.rifftyo.githubuserapp.ViewModel.MainViewModel
+import com.rifftyo.githubuserapp.adapter.UsersAdapter
 import com.rifftyo.githubuserapp.data.response.UserItem
 import com.rifftyo.githubuserapp.databinding.ActivityMainBinding
 
@@ -21,7 +23,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Koneksi MainViewModel
-        val mainViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
+        val mainViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(
+            MainViewModel::class.java)
 
 
         // Koneksi Fungsi MainViewModel

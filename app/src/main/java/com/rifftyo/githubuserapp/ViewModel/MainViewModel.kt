@@ -1,10 +1,11 @@
-package com.rifftyo.githubuserapp.ui
+package com.rifftyo.githubuserapp.ViewModel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.rifftyo.githubuserapp.data.response.FollowersUserResponseItem
+import com.rifftyo.githubuserapp.data.response.FollowingUserResponseItem
 import com.rifftyo.githubuserapp.data.response.SearchUserResponse
 import com.rifftyo.githubuserapp.data.response.UserDetailResponse
 import com.rifftyo.githubuserapp.data.response.UserItem
@@ -26,6 +27,9 @@ class MainViewModel: ViewModel() {
 
     private val _followersUser = MutableLiveData<List<FollowersUserResponseItem>>()
     val followersUser: LiveData<List<FollowersUserResponseItem>> = _followersUser
+
+    private val _followingUser = MutableLiveData<List<FollowingUserResponseItem>>()
+    val followingUser: LiveData<List<FollowingUserResponseItem>> = _followingUser
 
     companion object{
         private const val TAG = "MainViewModel"
@@ -109,7 +113,30 @@ class MainViewModel: ViewModel() {
                 _isLoading.value = false
                 Log.e(TAG, "onFailure: ${t.message}")
             }
+        })
+    }
 
+    // Fungsi Mendapatkan List Following
+    fun getFollowingUser(username: String) {
+        _isLoading.value = true
+        val client = ApiConfig.getApiService().getFollowing(username)
+        client.enqueue(object : Callback<List<FollowingUserResponseItem>> {
+            override fun onResponse(
+                call: Call<List<FollowingUserResponseItem>>,
+                response: Response<List<FollowingUserResponseItem>>
+            ) {
+                _isLoading.value = false
+                if (response.body() != null) {
+                    _followingUser.value = response.body()
+                } else {
+                    Log.e(TAG, "onFailure: ${response.message()}")
+                }
+            }
+
+            override fun onFailure(call: Call<List<FollowingUserResponseItem>>, t: Throwable) {
+                _isLoading.value = false
+                Log.e(TAG, "onFailure :${t.message}")
+            }
         })
     }
 }

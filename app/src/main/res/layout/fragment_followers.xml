@@ -8,10 +8,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_list_followers"
         android:layout_width="match_parent"
-        android:layout_height="692dp"
+        android:layout_height="690dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:overScrollMode="never"
         tools:listitem="@layout/list_users" />
 

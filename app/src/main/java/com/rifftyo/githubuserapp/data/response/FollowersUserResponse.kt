@@ -2,12 +2,6 @@ package com.rifftyo.githubuserapp.data.response
 
 import com.google.gson.annotations.SerializedName
 
-data class FollowersUserResponse(
-
-	@field:SerializedName("FollowersUserResponse")
-	val followersUserResponse: List<FollowersUserResponseItem>
-)
-
 data class FollowersUserResponseItem(
 
 	@field:SerializedName("gists_url")

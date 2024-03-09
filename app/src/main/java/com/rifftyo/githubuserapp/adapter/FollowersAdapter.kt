@@ -24,7 +24,7 @@ class FollowersAdapter: ListAdapter<FollowersUserResponseItem, FollowersAdapter.
         holder.bind(userFollow)
     }
 
-    class MyViewHolderFollowers(val binding: ListUsersBinding): RecyclerView.ViewHolder(binding.root) {
+    class MyViewHolderFollowers(private val binding: ListUsersBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(userFollowers: FollowersUserResponseItem) {
             binding.username.text = userFollowers.login
             val idFormat = itemView.context.getString(R.string.id_profile_users)

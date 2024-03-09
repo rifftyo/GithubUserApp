@@ -22,7 +22,7 @@ class UserDetailActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "UserDetail"
-        const val EXTRA_USERNAME = "extra_username"
+        var EXTRA_USERNAME = "extra_username"
 
         @StringRes
         private val TAB_TITLES = intArrayOf(
@@ -65,8 +65,7 @@ class UserDetailActivity : AppCompatActivity() {
         val username = intent.getStringExtra(EXTRA_USERNAME)
         if (username != null) {
             mainViewModel.getDetailUsers(username)
-            FollowersFragment.EXTRA_FOLLOWERS = username
-            FollowingFragment.EXTRA_FOLLOWING = username
+            EXTRA_USERNAME = username
         } else {
             Log.e(TAG, "No username provided")
         }

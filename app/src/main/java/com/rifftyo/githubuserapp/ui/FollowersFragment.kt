@@ -18,11 +18,6 @@ class FollowersFragment : Fragment() {
     private lateinit var binding: FragmentFollowersBinding
     private lateinit var adapter: FollowersAdapter
 
-    companion object {
-        var EXTRA_FOLLOWERS = "extrafollowers"
-    }
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,7 +45,7 @@ class FollowersFragment : Fragment() {
 
         showRecyclerView()
 
-        mainViewModel.getFollowersUser(EXTRA_FOLLOWERS)
+        mainViewModel.getFollowersUser(UserDetailActivity.EXTRA_USERNAME)
     }
 
     private fun showLoading(isLoading: Boolean) {

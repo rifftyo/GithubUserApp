@@ -11,12 +11,24 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/icon_image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="10dp"
         android:hint="@string/cari_username">
     </com.google.android.material.search.SearchBar>
+
+    <ImageView
+        android:id="@+id/icon_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/favorite_icon"
+        app:layout_constraintBottom_toBottomOf="@id/search_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/search_bar"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"/>
 
     <com.google.android.material.search.SearchView
         android:id="@+id/search_view"
@@ -30,7 +42,6 @@
         app:layout_constraintStart_toStartOf="parent">
     </com.google.android.material.search.SearchView>
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_list_users"
         android:layout_width="0dp"
@@ -38,11 +49,11 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:overScrollMode="never"
-        tools:listitem="@layout/list_users"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/search_bar"
-        app:layout_constraintStart_toStartOf="@id/search_bar"
-        app:layout_constraintEnd_toEndOf="@id/search_bar"/>
+        tools:listitem="@layout/list_users" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -55,5 +66,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:visibility="visible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:foregroundGravity="bottom"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/settings_icon"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

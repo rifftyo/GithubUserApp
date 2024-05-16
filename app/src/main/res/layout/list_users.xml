@@ -33,7 +33,7 @@
         app:layout_constraintStart_toEndOf="@+id/profile_image"
         app:layout_constraintTop_toTopOf="@+id/profile_image"
         app:layout_constraintVertical_bias="0.0"
-        tools:text="Username" />
+        tools:text="@string/username" />
 
     <TextView
         android:id="@+id/id_profile"
@@ -46,7 +46,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/profile_image"
         app:layout_constraintTop_toBottomOf="@+id/username"
-        tools:text="ID Profile" />
+        tools:text="@string/idProfile" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

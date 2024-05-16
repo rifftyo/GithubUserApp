@@ -28,7 +28,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_image_detail"
-        tools:text="nama" />
+        tools:text="@string/nama" />
 
     <TextView
         android:id="@+id/username_user_detail"
@@ -39,7 +39,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_detail_user"
-        tools:text="Username" />
+        tools:text="@string/username" />
 
     <TextView
         android:id="@+id/tvFollowers"
@@ -61,7 +61,7 @@
         app:layout_constraintEnd_toEndOf="@id/tvFollowers"
         app:layout_constraintStart_toStartOf="@id/tvFollowers"
         app:layout_constraintTop_toBottomOf="@+id/tvFollowers"
-        tools:text="5" />
+        tools:text="@string/_5" />
 
     <TextView
         android:id="@+id/tvFollowing"
@@ -83,7 +83,7 @@
         app:layout_constraintEnd_toEndOf="@id/tvFollowing"
         app:layout_constraintStart_toStartOf="@id/tvFollowing"
         app:layout_constraintTop_toBottomOf="@id/tvFollowing"
-        tools:text="5" />
+        tools:text="@string/_5" />
 
     <ProgressBar
         android:id="@+id/progress_bar_detail_user"
@@ -107,6 +107,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username_user_detail"/>
 
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
         android:layout_width="0dp"
@@ -118,4 +119,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tabs"
         app:layout_constraintVertical_bias="0.0" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:foregroundGravity="bottom"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/favorite_border_icon"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

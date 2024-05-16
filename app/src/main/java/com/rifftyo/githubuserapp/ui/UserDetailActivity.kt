@@ -3,6 +3,7 @@ package com.rifftyo.githubuserapp.ui
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -13,12 +14,19 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.rifftyo.githubuserapp.R
 import com.rifftyo.githubuserapp.ViewModel.MainViewModel
 import com.rifftyo.githubuserapp.adapter.SectionsPagerAdapter
+import com.rifftyo.githubuserapp.data.FavUserRepository
+import com.rifftyo.githubuserapp.data.database.FavoriteUser
+import com.rifftyo.githubuserapp.data.database.FavoriteUserRoomDatabase
 import com.rifftyo.githubuserapp.data.response.UserDetailResponse
 import com.rifftyo.githubuserapp.databinding.ActivityUserDetailBinding
+import com.rifftyo.githubuserapp.utils.AppExecutors
 
 class UserDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityUserDetailBinding
+    private var isFavorite = false
+    private lateinit var favUserRepository: FavUserRepository
+
 
     companion object {
         private const val TAG = "UserDetail"
@@ -35,6 +43,11 @@ class UserDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityUserDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Inisialisasi favUserRepository
+        val favoriteDao = FavoriteUserRoomDatabase.getDatabase(applicationContext).FavoriteUserDao()
+        val appExecutors = AppExecutors()
+        favUserRepository = FavUserRepository.getInstance(favoriteDao, appExecutors)
 
         // Koneksi Tab Layout
         val sectionsPagerAdapter = SectionsPagerAdapter(this)
@@ -66,8 +79,33 @@ class UserDetailActivity : AppCompatActivity() {
         if (username != null) {
             mainViewModel.getDetailUsers(username)
             EXTRA_USERNAME = username
+
+            // Ambil status favorit dari database
+            favUserRepository.getFavoriteUser().observe(this) { favoriteUsers ->
+                val favoriteUser = favoriteUsers.find { it.username == username }
+                isFavorite = favoriteUser != null
+                updateFavoriteButtonIcon()
+            }
         } else {
             Log.e(TAG, "No username provided")
+        }
+
+        // Aksi Klik Float Button
+        binding.fabAdd.setOnClickListener {
+            isFavorite = !isFavorite    // Toggle Status Favorite
+            updateFavoriteButtonIcon()
+
+            val userDetail = mainViewModel.userDetail.value
+            userDetail?.let { detail ->
+                val favoriteUser = FavoriteUser(detail.login, detail.avatarUrl ?: "", isFavorite)
+                if (isFavorite) {
+                    favUserRepository.addFavoriteUser(favoriteUser)
+                    Toast.makeText(this, "User Ditambahkan Ke Favorit", Toast.LENGTH_SHORT).show()
+                } else {
+                    favUserRepository.removeFavoriteUser(favoriteUser)
+                    Toast.makeText(this, "User Dihapus Dari Favorit", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 
@@ -88,6 +126,14 @@ class UserDetailActivity : AppCompatActivity() {
             binding.progressBarDetailUser.visibility = View.VISIBLE
         } else {
             binding.progressBarDetailUser.visibility = View.GONE
+        }
+    }
+
+    private fun updateFavoriteButtonIcon() {
+        if (isFavorite) {
+            binding.fabAdd.setImageResource(R.drawable.favorite_icon)
+        } else {
+            binding.fabAdd.setImageResource(R.drawable.favorite_border_icon)
         }
     }
 }
